@@ -1,0 +1,340 @@
+/* Reset Básico y Estilos Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Barra de Navegación */
+.navbar {
+    background: #477ae5;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #c5c5c5;
+}
+
+.menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* Hero Carousel */
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.carousel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+}
+
+.slide-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.slide-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    background-color: #0078D4;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #005a9e;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-control.prev { left: 15px; }
+.carousel-control.next { right: 15px; }
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.indicator.active {
+    background: #fff;
+}
+
+/* Secciones y Contenedor de Tarjetas */
+.section {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* Estilo para Tarjetas de PRODUCTO */
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 240px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    margin-bottom: 10px;
+    color: #0078D4;
+    font-size: 1.1rem;
+}
+
+.product-card p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Empuja el botón hacia abajo */
+}
+
+.product-card button {
+    background-color: #0078D4;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+    background-color: #005a9e;
+}
+
+/* Estilo para Tarjetas de NOTICIAS */
+.news-card {
+    background: #fff;
+    border-radius: 8px;
+    width: 380px;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Para que la imagen respete los bordes redondeados */
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.news-card .news-card-content {
+    padding: 20px;
+}
+
+.news-card h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.news-card p {
+    font-size: 0.95rem;
+}
+
+/* Newsletter */
+.newsletter-form input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.newsletter-form button {
+    padding: 10px 15px;
+    background-color: #0078D4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.social-links a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 60px; /* Ajustar según la altura de tu navbar */
+        left: 0;
+        background: #477ae5; /* Mismo fondo que la navbar */
+        border-top: 1px solid #c5c5c5;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+    
+    .menu-btn {
+        display: block;
+    }
+
+    .slide-content h1 { font-size: 2rem; }
+    .slide-content p { font-size: 1rem; }
+    .product-card, .news-card { width: 90%; max-width: 380px; }
+}
