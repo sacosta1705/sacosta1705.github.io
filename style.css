@@ -834,3 +834,117 @@ h3 { font-size: 1.25rem; }
     background-color: #fff0e7; /* Un naranja muy claro */
     color: var(--primary-orange);
 }
+
+/* === ESTILOS PARA LA PÁGINA DE DESCARGAS (NUEVO DISEÑO) === */
+
+.download-card {
+    background: var(--background-white);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+    overflow: hidden; /* Para que el borde redondeado afecte a los hijos */
+    transition: box-shadow 0.3s ease;
+}
+
+.download-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.download-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--background-light);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-blue);
+    color: var(--background-white);
+    border-radius: 50%;
+    font-size: 1.8rem;
+}
+
+.download-card:nth-of-type(2n) .product-icon {
+    /* Alterna el color del ícono para más dinamismo */
+    background-color: var(--primary-orange);
+}
+
+.product-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.4rem;
+    color: var(--text-dark);
+}
+
+.product-info p {
+    margin: 0;
+    color: var(--text-light);
+}
+
+.download-list {
+    padding: 0;
+}
+
+.download-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.download-item:last-child {
+    border-bottom: none;
+}
+
+.download-item:hover {
+    background-color: #f9f9fa;
+}
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.file-meta {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Ajustes responsivos para las tarjetas de descarga */
+@media (max-width: 600px) {
+    .download-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+/* Estilos para la funcionalidad de acordeón */
+.download-card-header {
+    cursor: pointer;
+}
+.download-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+.download-card-header.active + .download-list {
+    /* Este estilo se aplica cuando el acordeón está abierto */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

@@ -204,3 +204,26 @@ if (productContainer) {
         updateCarouselState();
     }
 }
+
+// --- LÓGICA DE ACORDEÓN PARA PÁGINA DE DESCARGAS ---
+document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona todos los encabezados de las tarjetas de descarga
+    const cardHeaders = document.querySelectorAll('.download-card-header');
+
+    cardHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            // Encuentra el contenedor de la lista de descargas
+            const list = header.nextElementSibling;
+            
+            // Alterna la clase 'active' en el encabezado
+            header.classList.toggle('active');
+
+            // Alterna la visibilidad de la lista
+            if (list.style.maxHeight) {
+                list.style.maxHeight = null; // Colapsar
+            } else {
+                list.style.maxHeight = list.scrollHeight + "px"; // Expandir
+            } 
+        });
+    });
+});
