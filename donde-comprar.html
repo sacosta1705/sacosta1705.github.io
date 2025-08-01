@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saintnet Latinoamerica - Nueva Imagen</title>
+    <title>¿Dónde Comprar? - Saintnet Latinoamerica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -14,7 +14,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <a href="/"><img src="/images/saint_logo_azul.png" alt="Saintnet Latinoamerica" height="40px"
+                <a href="/"><img src="/images/saint_logo_blanco.png" alt="Saintnet Latinoamerica" height="40px"
                         width="100px"></a>
             </div>
             <ul class="nav-links">
@@ -33,59 +33,49 @@
         </div>
     </nav>
 
-    <header class="hero-carousel">
-        <div class="carousel-container">
-            <div class="slide active"
-                style="background-image: url('https://via.placeholder.com/1200x500/0078D4/FFFFFF?text=Imagen+1');">
-                <div class="slide-content">
-                    <h1>Innovación y Tecnología para tu Empresa</h1>
-                    <p>Descubre nuestras soluciones de software de gestión.</p>
-                    <a href="#" class="cta-button">Ver Productos</a>
-                </div>
+    <header class="page-header">
+        <div class="container">
+            <h1>Encuentra un Distribuidor</h1>
+            <p>Conecta con nuestros socios de negocios autorizados en tu país.</p>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div class="filter-container">
+                <select id="country-filter">
+                    <option value="todos">Todos los países</option>
+                    <option value="ar">Argentina</option>
+                    <option value="bo">Bolivia</option>
+                    <option value="cl">Chile</option>
+                    <option value="co">Colombia</option>
+                </select>
             </div>
-            <div class="slide"
-                style="background-image: url('https://via.placeholder.com/1200x500/343A40/FFFFFF?text=Imagen+2');">
-                <div class="slide-content">
-                    <h1>Noticias y Actualizaciones</h1>
-                    <p>Mantente al día con nuestros últimos lanzamientos.</p>
-                    <a href="#" class="cta-button">Leer Más</a>
+
+            <div class="distributor-cards-container">
+                <div class="distributor-card" data-country="ar">
+                    <img src="https://via.placeholder.com/100x100/cccccc/FFFFFF?text=Logo" alt="Logo del distribuidor">
+                    <div class="distributor-info">
+                        <h3>Nombre del Distribuidor (Argentina)</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Ciudad, Provincia</p>
+                        <p><i class="fas fa-phone"></i> +54 11 1234-5678</p>
+                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">sitiooficial.com</a></p>
+                    </div>
                 </div>
-            </div>
-            <div class="slide"
-                style="background-image: url('https://via.placeholder.com/1200x500/28A745/FFFFFF?text=Imagen+3');">
-                <div class="slide-content">
-                    <h1>Soporte Dedicado</h1>
-                    <p>Nuestro equipo está listo para ayudarte.</p>
-                    <a href="#" class="cta-button">Contactar</a>
-                </div>
-            </div>
-            <div class="slide"
-                style="background-image: url('https://via.placeholder.com/1200x500/DC3545/FFFFFF?text=Imagen+4');">
-                <div class="slide-content">
-                    <h1>Comunidad Saint</h1>
-                    <p>Únete a miles de usuarios y expertos.</p>
-                    <a href="#" class="cta-button">Unirse</a>
-                </div>
-            </div>
-            <div class="slide"
-                style="background-image: url('https://via.placeholder.com/1200x500/FFC107/333333?text=Imagen+5');">
-                <div class="slide-content">
-                    <h1>Licenciamiento Flexible</h1>
-                    <p>Planes que se adaptan a tu crecimiento.</p>
-                    <a href="#" class="cta-button">Ver Planes</a>
+                 <div class="distributor-card" data-country="co">
+                    <img src="https://via.placeholder.com/100x100/cccccc/FFFFFF?text=Logo" alt="Logo del distribuidor">
+                    <div class="distributor-info">
+                        <h3>Otro Distribuidor (Colombia)</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Bogotá, Cundinamarca</p>
+                        <p><i class="fas fa-phone"></i> +57 1 9876-5432</p>
+                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">otrodistribuidor.com</a></p>
+                    </div>
                 </div>
             </div>
         </div>
+    </main>
 
-        <button class="carousel-control prev">&lt;</button>
-        <button class="carousel-control next">&gt;</button>
-
-        <div class="carousel-indicators"></div>
-    </header>
-
-    
-
-    <footer>
+    <footer class="main-footer">
         <div class="container">
             <div class="social-links">
                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -100,5 +90,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
