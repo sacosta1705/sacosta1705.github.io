@@ -65,70 +65,44 @@ body {
     color: #fff;
 }
 
+/* === SECCIÓN DEL CARRUSEL MODIFICADA === */
+
 /* Hero Carousel (SOLO PARA INDEX.HTML) */
 .hero-carousel {
     position: relative;
     width: 100%;
-    height: 500px;
+    /* La altura se controla con aspect-ratio para evitar que la imagen se corte */
+    aspect-ratio: 1440 / 600;
     overflow: hidden;
 }
 
-.carousel-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
+.carousel-container,
 .slide {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.slide {
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
+    transition: opacity 1.2s ease-in-out;
 }
 
 .slide.active {
     opacity: 1;
+    z-index: 1;
+    /* Asegura que la diapositiva activa esté por encima */
 }
 
-.slide-content {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 2rem 3rem;
-    border-radius: 10px;
-}
+/* Se eliminaron por completo las reglas .slide-content, .slide-content h1, .slide-content p y .cta-button 
+   ya que el texto ha sido removido del carrusel. */
 
-.slide-content h1 {
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
-}
+/* === FIN DE LA SECCIÓN MODIFICADA === */
 
-.slide-content p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-}
-
-.cta-button {
-    background-color: #0078D4;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-    background-color: #005a9e;
-}
 
 .carousel-control {
     position: absolute;
@@ -143,8 +117,13 @@ body {
     z-index: 10;
 }
 
-.carousel-control.prev { left: 15px; }
-.carousel-control.next { right: 15px; }
+.carousel-control.prev {
+    left: 15px;
+}
+
+.carousel-control.next {
+    right: 15px;
+}
 
 .carousel-indicators {
     position: absolute;
@@ -340,7 +319,7 @@ body {
 .distributor-card {
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
     padding: 20px;
@@ -350,7 +329,7 @@ body {
 
 .distributor-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .distributor-card img {
@@ -387,7 +366,8 @@ body {
     text-align: left;
 }
 
-.downloads-table th, .downloads-table td {
+.downloads-table th,
+.downloads-table td {
     padding: 15px;
     border-bottom: 1px solid #e6e6e6;
 }
@@ -415,9 +395,59 @@ body {
     margin-right: 5px;
 }
 
+/* Estilos Adicionales para Comunidad */
+.intro-text {
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.feature-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    width: 320px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #0078D4;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card-icon {
+    font-size: 2.5rem;
+    color: #0078D4;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
 /* Footer */
-footer, .main-footer {
-    background: #333;
+footer,
+.main-footer {
+    background: #d1469f;
     color: #fff;
     text-align: center;
     padding: 2rem 0;
@@ -452,64 +482,19 @@ footer, .main-footer {
     .nav-links li {
         margin: 15px 0;
     }
-    
+
     .menu-btn {
         display: block;
     }
 
-    .slide-content h1 { font-size: 2rem; }
-    .slide-content p { font-size: 1rem; }
-    .page-header h1 {font-size: 2rem;}
+    .page-header h1 {
+        font-size: 2rem;
+    }
 
-    .product-card, .news-card { width: 90%; max-width: 380px; }
-}
-
-/* --- ESTILOS ADICIONALES PARA PÁGINAS INTERNAS (Comunidad) --- */
-
-.intro-text {
-    max-width: 800px;
-    margin: 0 auto 3rem auto;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    text-align: center;
-}
-
-.feature-card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 30px;
-    width: 320px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border-top: 4px solid #0078D4; /* Acento de color */
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.feature-card-icon {
-    font-size: 2.5rem;
-    color: #0078D4;
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.feature-card p {
-    font-size: 0.95rem;
-    color: #555;
-}
-
-.cta-section {
-    text-align: center;
-    margin-top: 4rem;
-    padding: 2rem;
-    background-color: #f8f9fa;
-    border-radius: 8px;
+    .product-card,
+    .news-card,
+    .feature-card {
+        width: 90%;
+        max-width: 380px;
+    }
 }
