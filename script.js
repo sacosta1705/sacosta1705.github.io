@@ -227,3 +227,64 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// --- LÓGICA DE PAGINACIÓN PARA LA PÁGINA DE NOTICIAS ---
+document.addEventListener('DOMContentLoaded', function() {
+    const newsGrid = document.getElementById('news-grid');
+    const paginationContainer = document.getElementById('pagination-container');
+
+    // Solo ejecutar si estamos en la página de noticias (verificando la existencia de los elementos)
+    if (newsGrid && paginationContainer) {
+        const itemsPerPage = 6; // ¿Cuántas noticias mostrar por página?
+        const allNewsItems = Array.from(newsGrid.getElementsByClassName('news-card'));
+        const totalPages = Math.ceil(allNewsItems.length / itemsPerPage);
+        let currentPage = 1;
+
+        function showPage(page) {
+            currentPage = page;
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+
+            // Ocultar todos los artículos
+            allNewsItems.forEach(item => item.style.display = 'none');
+
+            // Mostrar solo los artículos de la página actual
+            allNewsItems.slice(startIndex, endIndex).forEach(item => item.style.display = 'flex');
+
+            updatePaginationUI();
+            window.scrollTo(0, 0); // Opcional: lleva al usuario al inicio de la página
+        }
+
+        function updatePaginationUI() {
+            paginationContainer.innerHTML = ''; // Limpiar botones existentes
+
+            // Botón "Anterior"
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '&laquo;';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => showPage(currentPage - 1));
+            paginationContainer.appendChild(prevButton);
+
+            // Botones de número de página
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => showPage(i));
+                paginationContainer.appendChild(pageButton);
+            }
+
+            // Botón "Siguiente"
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '&raquo;';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => showPage(currentPage + 1));
+            paginationContainer.appendChild(nextButton);
+        }
+        
+        // Mostrar la primera página por defecto
+        showPage(1);
+    }
+});
