@@ -5,15 +5,17 @@
 :root {
     /* Paleta de colores oficial */
     --primary-blue: #253677;
-    --primary-blue-dark: #1a2754; /* Un tono más oscuro para hovers */
+    --primary-blue-dark: #1a2754;
     --primary-orange: #ee711c;
-    --primary-orange-dark: #d56417; /* Un tono más oscuro para hovers */
+    --primary-orange-dark: #d56417;
 
     /* Colores de soporte */
     --text-dark: #0b0b0b;
     --text-light: #505050;
-    --background-light: #f5f7fa; /* Un gris azulado muy claro */
+    --background-light: #f5f7fa;
     --background-white: #ffffff;
+    --blue-tint: #e9f2ff;
+    /* Nuevo color azul pálido */
     --border-color: #e1e1e1;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
@@ -32,6 +34,7 @@ body {
     line-height: 1.6;
     color: var(--text-light);
     background-color: var(--background-white);
+    /* El fondo por defecto vuelve a ser blanco */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -42,14 +45,25 @@ body {
     padding: 0 24px;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     color: var(--text-dark);
     line-height: 1.3;
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.25rem; }
-h3 { font-size: 1.25rem; }
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
 
 /* === BARRA DE NAVEGACIÓN === */
 .navbar {
@@ -68,13 +82,6 @@ h3 { font-size: 1.25rem; }
     align-items: center;
 }
 
-.navbar .logo a {
-    color: var(--text-dark);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
 .nav-links {
     display: flex;
     list-style: none;
@@ -89,7 +96,7 @@ h3 { font-size: 1.25rem; }
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
     padding-bottom: 5px;
     border-bottom: 2px solid transparent;
 }
@@ -100,10 +107,10 @@ h3 { font-size: 1.25rem; }
     border-bottom-color: var(--primary-blue);
 }
 
-/* El link de licenciamiento con color de acento */
 .nav-links a[href="https://market.esaint.net"] {
     color: var(--primary-orange);
 }
+
 .nav-links a[href="https://market.esaint.net"]:hover {
     color: var(--primary-orange-dark);
     border-bottom-color: var(--primary-orange-dark);
@@ -120,12 +127,13 @@ h3 { font-size: 1.25rem; }
 .hero-carousel {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 6;
+    aspect-ratio: 16 / 6.5;
     overflow: hidden;
     background-color: #f0f0f0;
 }
 
-.carousel-container, .slide {
+.carousel-container,
+.slide {
     position: absolute;
     top: 0;
     left: 0;
@@ -138,6 +146,32 @@ h3 { font-size: 1.25rem; }
     background-position: center;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.slide-content {
+    background-color: rgba(11, 11, 11, 0.55);
+    padding: 2rem 3rem;
+    border-radius: var(--border-radius);
+    max-width: 700px;
+    backdrop-filter: blur(5px);
+}
+
+.slide-content h2 {
+    color: white;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .slide.active {
@@ -169,8 +203,13 @@ h3 { font-size: 1.25rem; }
     background-color: var(--background-white);
 }
 
-.carousel-control.prev { left: 20px; }
-.carousel-control.next { right: 20px; }
+.carousel-control.prev {
+    left: 20px;
+}
+
+.carousel-control.next {
+    right: 20px;
+}
 
 .carousel-indicators {
     position: absolute;
@@ -188,7 +227,7 @@ h3 { font-size: 1.25rem; }
     background: rgba(255, 255, 255, 0.7);
     margin: 0 6px;
     cursor: pointer;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
 
@@ -198,8 +237,8 @@ h3 { font-size: 1.25rem; }
 
 /* === ENCABEZADO PARA PÁGINAS INTERNAS === */
 .page-header {
-    background-color: var(--background-light);
-    color: var(--text-dark);
+    background-color: var(--primary-blue);
+    color: var(--background-white);
     padding: 4rem 0;
     text-align: center;
 }
@@ -208,11 +247,12 @@ h3 { font-size: 1.25rem; }
     font-size: 2.8rem;
     margin-bottom: 1rem;
     font-weight: 700;
+    color: var(--background-white);
 }
 
 .page-header p {
     font-size: 1.2rem;
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -227,10 +267,18 @@ h3 { font-size: 1.25rem; }
     font-weight: 700;
     margin-bottom: 4rem;
     text-align: center;
+    color: var(--primary-blue);
 }
 
-.bg-light {
+/* === NUEVOS ESTILOS DE SECCIÓN PARA EL INDEX === */
+.section-alt-color {
     background-color: var(--background-light);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bg-blue-tint {
+    background-color: var(--blue-tint);
 }
 
 .cards-container {
@@ -238,6 +286,50 @@ h3 { font-size: 1.25rem; }
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
+}
+
+/* === BOTONES === */
+.btn-primary,
+.download-button,
+.newsletter-form button {
+    background-color: var(--primary-orange);
+    color: var(--background-white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover,
+.download-button:hover,
+.newsletter-form button:hover {
+    background-color: var(--primary-orange-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background-color: var(--primary-blue);
+    color: var(--background-white);
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-blue-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 
 /* === TARJETAS DE PRODUCTO === */
@@ -270,6 +362,7 @@ h3 { font-size: 1.25rem; }
     color: var(--primary-blue);
     font-size: 1.2rem;
     font-weight: 600;
+    min-height: 50px;
 }
 
 .product-card p {
@@ -280,33 +373,6 @@ h3 { font-size: 1.25rem; }
 
 .product-card .btn-primary {
     width: 100%;
-}
-
-/* === BOTONES === */
-.btn, .btn-primary, button {
-    background-color: var(--primary-blue);
-    color: var(--background-white);
-    border: none;
-    padding: 12px 24px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn:hover, .btn-primary:hover, button:hover {
-    background-color: var(--primary-blue-dark);
-    transform: translateY(-2px);
-}
-
-.btn-accent {
-    background-color: var(--primary-orange);
-}
-.btn-accent:hover {
-    background-color: var(--primary-orange-dark);
 }
 
 /* === TARJETAS DE NOTICIAS === */
@@ -354,17 +420,25 @@ h3 { font-size: 1.25rem; }
 }
 
 .news-card-link {
-    color: var(--primary-blue);
+    color: var(--primary-orange);
     text-decoration: none;
     font-weight: bold;
     font-size: 1rem;
     margin-top: auto;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
 }
 
 .news-card-link:hover {
-    color: var(--primary-blue-dark);
+    color: var(--primary-orange-dark);
     text-decoration: underline;
+    transform: translateX(5px);
+}
+
+.news-card-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
 }
 
 /* === CARRUSEL DE NOTICIAS === */
@@ -403,13 +477,23 @@ h3 { font-size: 1.25rem; }
     box-shadow: var(--shadow-md);
     transition: background-color 0.3s ease;
 }
+
 .news-nav-btn:hover {
     background-color: var(--background-white);
 }
 
-.news-nav-btn.prev-news { left: -24px; }
-.news-nav-btn.next-news { right: -24px; }
-.news-nav-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+.news-nav-btn.prev-news {
+    left: -24px;
+}
+
+.news-nav-btn.next-news {
+    right: -24px;
+}
+
+.news-nav-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 
 /* === NEWSLETTER === */
 .newsletter-form {
@@ -418,6 +502,7 @@ h3 { font-size: 1.25rem; }
     gap: 10px;
     flex-wrap: wrap;
 }
+
 .newsletter-form input {
     padding: 12px 15px;
     width: 320px;
@@ -429,9 +514,9 @@ h3 { font-size: 1.25rem; }
 /* === FOOTER === */
 .main-footer {
     background: var(--primary-blue);
-    color: #d0d5e8; /* Un color de texto más claro que combine con el azul */
+    color: #e0e5f5;
     padding: 4rem 0 2rem 0;
-    margin-top: 6rem;
+    margin-top: 0;
 }
 
 .footer-grid {
@@ -450,6 +535,7 @@ h3 { font-size: 1.25rem; }
 
 .footer-links {
     list-style: none;
+    padding-left: 0;
 }
 
 .footer-links li {
@@ -457,14 +543,15 @@ h3 { font-size: 1.25rem; }
 }
 
 .footer-links a {
-    color: #d0d5e8;
+    color: #e0e5f5;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
 .footer-links a:hover {
     color: var(--background-white);
     text-decoration: underline;
+    padding-left: 5px;
 }
 
 .footer-bottom {
@@ -473,71 +560,130 @@ h3 { font-size: 1.25rem; }
     align-items: center;
     flex-wrap: wrap;
     padding-top: 2rem;
-    border-top: 1px solid #3c4d8f; /* Un borde más claro que el fondo */
+    border-top: 1px solid #3c4d8f;
 }
 
 .social-links a {
-    color: #d0d5e8;
+    color: #e0e5f5;
     margin: 0 12px;
     font-size: 1.5rem;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-links a:hover {
-    color: var(--background-white);
+    color: var(--primary-orange);
+    transform: scale(1.15);
 }
 
 .footer-bottom p {
     font-size: 0.9rem;
 }
 
-/* === PÁGINA DESCARGAS (TABLA) === */
-.downloads-table-container {
-    overflow-x: auto;
-}
-.downloads-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    box-shadow: var(--shadow-md);
+/* === PÁGINA DESCARGAS === */
+.download-card {
+    background: var(--background-white);
     border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
     overflow: hidden;
+    transition: box-shadow 0.3s ease;
 }
-.downloads-table th, .downloads-table td {
-    padding: 16px 20px;
+
+.download-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.download-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    background-color: var(--background-white);
+    transition: background-color 0.2s ease;
     border-bottom: 1px solid var(--border-color);
 }
-.downloads-table thead {
-    background-color: var(--background-light);
+
+.download-card-header:hover {
+    background-color: #fcfdff;
 }
-.downloads-table th {
-    font-weight: 600;
+
+.product-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-blue);
+    color: var(--background-white);
+    border-radius: 50%;
+    font-size: 1.8rem;
+}
+
+.download-card:nth-of-type(2n) .product-icon {
+    background-color: var(--primary-orange);
+}
+
+.product-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.4rem;
     color: var(--text-dark);
 }
-.downloads-table tbody tr:last-child td {
-    border-bottom: none;
+
+.product-info p {
+    margin: 0;
+    color: var(--text-light);
 }
-.downloads-table tbody tr:hover {
-    background-color: #f9f9f9;
+
+.download-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: #f5f7fa;
 }
-.download-button {
-    background-color: var(--primary-blue);
-    color: white;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 500;
-    display: inline-flex;
+
+.download-card-header.active+.download-list {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.download-card-header.active {
+    background-color: var(--background-light);
+}
+
+.download-item {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease;
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid #e9eef3;
 }
-.download-button:hover {
-    background-color: var(--primary-blue-dark);
+
+.download-item:first-child {
+    border-top: none;
 }
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.file-meta {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
 .download-button i {
-    color: white !important; /* Asegurar que el icono sea blanco */
+    color: white !important;
 }
 
 /* === PÁGINA ¿DÓNDE COMPRAR? === */
@@ -545,6 +691,7 @@ h3 { font-size: 1.25rem; }
     margin-bottom: 2.5rem;
     text-align: center;
 }
+
 #country-filter {
     padding: 12px 16px;
     font-size: 1rem;
@@ -552,6 +699,7 @@ h3 { font-size: 1.25rem; }
     border: 1px solid var(--border-color);
     min-width: 250px;
 }
+
 .distributor-card {
     display: flex;
     gap: 24px;
@@ -561,106 +709,33 @@ h3 { font-size: 1.25rem; }
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
     margin-bottom: 24px;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
 .distributor-card:hover {
     box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
 }
+
 .distributor-card img {
     flex-shrink: 0;
 }
+
 .distributor-info p {
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .distributor-info i {
-    color: var(--primary-orange); /* Usamos el naranja para los iconos aquí */
+    color: var(--primary-orange);
 }
 
-/* === DISEÑO RESPONSIVO === */
-@media (max-width: 1200px) {
-    .news-carousel-container {
-        max-width: 730px; /* 2 tarjetas + gap */
-    }
-}
-
-@media (max-width: 992px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    .section { padding: 4rem 0; }
-}
-
-@media (max-width: 800px) {
-    .news-carousel-container {
-        max-width: 350px; /* 1 tarjeta */
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        top: 70px; /* altura de navbar */
-        left: 0;
-        background: var(--background-white);
-        border-top: 1px solid var(--border-color);
-        padding: 20px 0;
-        box-shadow: var(--shadow-md);
-    }
-    .nav-links.active {
-        display: flex;
-    }
-    .nav-links li {
-        margin: 15px 0;
-    }
-    .menu-btn {
-        display: block;
-    }
-    .page-header h1 {font-size: 2rem;}
-    .product-card { width: calc(50% - 15px); }
-    .news-carousel-container {
-       width: 100%;
-       padding: 0 10px;
-    }
-    .news-nav-btn { display: none; }
-    .news-carousel-wrapper {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none; /* Firefox */
-    }
-    .news-carousel-wrapper::-webkit-scrollbar {
-        display: none; /* Chrome/Safari */
-    }
-    .news-card {
-        scroll-snap-align: center;
-    }
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    .footer-bottom {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-}
-
-@media (max-width: 576px) {
-    .product-card { width: 90%; max-width: 350px; }
-    .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-}
-
-/* === CARRUSEL DE PRODUCTOS (Añadir al final del CSS) === */
+/* === CARRUSEL DE PRODUCTOS === */
 .product-carousel-container {
     position: relative;
-    max-width: 960px; /* Ancho para 3 tarjetas visibles */
+    max-width: 960px;
     margin: 0 auto;
 }
 
@@ -669,13 +744,13 @@ h3 { font-size: 1.25rem; }
 }
 
 .product-carousel {
-    display: flex; /* Clave para que estén en línea */
+    display: flex;
     gap: 30px;
     transition: transform 0.5s ease-in-out;
 }
 
 .product-carousel .product-card {
-    flex-shrink: 0; /* Evita que las tarjetas se encojan */
+    flex-shrink: 0;
 }
 
 .product-nav-btn {
@@ -697,53 +772,27 @@ h3 { font-size: 1.25rem; }
     box-shadow: var(--shadow-md);
     transition: background-color 0.3s ease;
 }
+
 .product-nav-btn:hover {
     background-color: var(--background-white);
 }
 
-.product-nav-btn.prev-product { left: -24px; }
-.product-nav-btn.next-product { right: -24px; }
-.product-nav-btn:disabled { cursor: not-allowed; opacity: 0.5; }
-
-/* Ajustes responsivos para el carrusel de productos */
-@media (max-width: 1024px) {
-    .product-carousel-container {
-        max-width: 650px; /* Ancho para 2 tarjetas */
-    }
+.product-nav-btn.prev-product {
+    left: -24px;
 }
 
-@media (max-width: 768px) {
-    .product-carousel-container {
-       max-width: 100%; /* Ocupa todo el ancho disponible */
-       padding: 0 10px;
-    }
-    .product-nav-btn {
-        display: none; /* Ocultar botones, se usa scroll táctil */
-    }
-    .product-carousel-wrapper {
-        overflow-x: auto; /* Habilitar scroll horizontal */
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-    .product-carousel-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-    .product-carousel .product-card {
-        scroll-snap-align: center;
-    }
-}
-@media (max-width: 380px) {
-    .product-carousel-container {
-        max-width: 310px; /* Ancho para 1 tarjeta */
-    }
+.product-nav-btn.next-product {
+    right: -24px;
 }
 
-/* === SECCIÓN COMUNIDAD SAINT (VERSIÓN COMPLETA) === */
+.product-nav-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 
+/* === SECCIÓN COMUNIDAD SAINT === */
 #comunidad .container {
-    /* El flexbox ahora está en el contenedor de las tarjetas */
-    display: block; /* Lo reseteamos para controlar el layout interno */
+    display: block;
 }
 
 #comunidad h2 {
@@ -754,7 +803,7 @@ h3 { font-size: 1.25rem; }
 .comunidad-cards-container {
     display: flex;
     justify-content: center;
-    align-items: stretch; /* Asegura que las tarjetas tengan la misma altura */
+    align-items: stretch;
     gap: 2rem;
     flex-wrap: wrap;
 }
@@ -769,7 +818,7 @@ h3 { font-size: 1.25rem; }
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 320px;
+    width: 350px;
 }
 
 .feature-card:hover {
@@ -784,19 +833,19 @@ h3 { font-size: 1.25rem; }
 }
 
 .feature-card h4 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--primary-blue);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
 }
 
 .feature-card p {
     font-size: 1rem;
     color: var(--text-light);
     line-height: 1.6;
-    flex-grow: 1; /* Permite que el párrafo ocupe el espacio para alinear botones */
+    flex-grow: 1;
 }
 
-/* Estilos para la llamada a la acción */
 .comunidad-cta {
     text-align: center;
     margin-top: 4rem;
@@ -809,13 +858,7 @@ h3 { font-size: 1.25rem; }
     font-size: 1.5rem;
 }
 
-/* === ESTILOS PARA LA SECCIÓN DE HERRAMIENTAS WEB === */
-
-#herramientas .product-card {
-    /* Hacemos un pequeño ajuste para que el contenido se alinee mejor */
-    justify-content: flex-start;
-}
-
+/* === ESTILOS PARA LA SECCIÓN DE HERRAMIENTAS WEB (ICONOS) === */
 .tool-icon {
     display: flex;
     align-items: center;
@@ -824,146 +867,32 @@ h3 { font-size: 1.25rem; }
     height: 80px;
     margin-bottom: 1.5rem;
     border-radius: 50%;
-    background-color: #e9f2ff; /* Un azul muy claro, del branding */
-    color: var(--primary-blue);
     font-size: 2.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Opcional: Un color de acento para un icono específico */
-#herramientas .product-card:nth-child(2) .tool-icon {
-    background-color: #fff0e7; /* Un naranja muy claro */
+.icon-bg-blue {
+    background-color: #e9f2ff;
+    color: var(--primary-blue);
+}
+
+.icon-bg-orange {
+    background-color: #fff0e7;
     color: var(--primary-orange);
 }
 
-/* === ESTILOS PARA LA PÁGINA DE DESCARGAS (NUEVO DISEÑO) === */
-
-.download-card {
-    background: var(--background-white);
-    border-radius: var(--border-radius);
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow-md);
-    overflow: hidden; /* Para que el borde redondeado afecte a los hijos */
-    transition: box-shadow 0.3s ease;
-}
-
-.download-card:hover {
-    box-shadow: var(--shadow-lg);
-}
-
-.download-card-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background-color: var(--background-light);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.product-icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background-color: var(--primary-blue);
-    color: var(--background-white);
-    border-radius: 50%;
-    font-size: 1.8rem;
-}
-
-.download-card:nth-of-type(2n) .product-icon {
-    /* Alterna el color del ícono para más dinamismo */
-    background-color: var(--primary-orange);
-}
-
-.product-info h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.4rem;
-    color: var(--text-dark);
-}
-
-.product-info p {
-    margin: 0;
-    color: var(--text-light);
-}
-
-.download-list {
-    padding: 0;
-}
-
-.download-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.2s ease;
-}
-
-.download-item:last-child {
-    border-bottom: none;
-}
-
-.download-item:hover {
-    background-color: #f9f9fa;
-}
-
-.file-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.file-name {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-dark);
-}
-
-.file-meta {
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
-
-/* Ajustes responsivos para las tarjetas de descarga */
-@media (max-width: 600px) {
-    .download-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-}
-
-/* Estilos para la funcionalidad de acordeón */
-.download-card-header {
-    cursor: pointer;
-}
-.download-list {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-.download-card-header.active + .download-list {
-    /* Este estilo se aplica cuando el acordeón está abierto */
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
-/* === ESTILOS PARA LA PÁGINA DE NOTICIAS CON PAGINACIÓN === */
-
+/* === PÁGINA DE NOTICIAS CON PAGINACIÓN === */
 #noticias .cards-container {
-    /* Usamos Grid para controlar las columnas fácilmente */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
-/* Ocultamos todas las tarjetas por defecto (JS las mostrará) */
 #news-grid .news-card {
     display: none;
+    width: 100%;
 }
 
-/* Estilos para el contenedor de la paginación */
 .pagination-nav {
     display: flex;
     justify-content: center;
@@ -996,7 +925,6 @@ h3 { font-size: 1.25rem; }
     background-color: var(--background-light);
 }
 
-/* Estilo para el botón de la página activa */
 .pagination-nav button.active {
     background-color: var(--primary-blue);
     border-color: var(--primary-blue);
@@ -1004,102 +932,12 @@ h3 { font-size: 1.25rem; }
     transform: none;
 }
 
-/* Ajustes responsivos para la cuadrícula */
-@media (max-width: 992px) {
-    #noticias .cards-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    #noticias .cards-container {
-        grid-template-columns: 1fr; /* Una sola columna en móviles */
-    }
-}
-
-/* === ESTILOS PARA LA PÁGINA DE PRODUCTOS (GRID SIN CATEGORÍAS) === */
-
-/* Estilos para el título principal y subtítulo de la página */
-.page-main-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-
-.page-subtitle {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    text-align: center;
-    margin-bottom: 4rem; /* Aumentamos el espacio antes de la cuadrícula */
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Estilos para la cuadrícula de productos */
-.product-grid-container {
-    display: grid;
-    /* Crea columnas responsivas que se ajustan automáticamente */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px; /* Espacio entre las tarjetas */
-}
-
-#productos-page .product-card {
-    /* Nos aseguramos que las tarjetas en esta página no se encojan */
-    flex-shrink: 0;
-}
-
-/* === ESTILOS PARA PÁGINAS CON GRID DE PRODUCTOS POR CATEGORÍA === */
-
-.product-category {
-    margin-bottom: 5rem; /* Espacio entre categorías de productos */
-}
-
-.category-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-
-.category-subtitle {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    text-align: center;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Reutilizamos el estilo de la cuadrícula de productos */
+/* === PÁGINA DE PRODUCTOS Y CATEGORÍAS === */
 .product-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
-
-/* Reutilizamos el estilo de las tarjetas y sus íconos */
-#productos-page .product-card, #productos-terceros-page .product-card {
-    flex-shrink: 0;
-}
-
-.tool-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1.5rem;
-    border-radius: 50%;
-    background-color: #e9f2ff;
-    color: var(--primary-blue);
-    font-size: 2.5rem;
-}
-/* === ESTILOS PARA PÁGINA DE CATEGORÍAS DE TERCEROS === */
 
 .category-grid-container {
     display: grid;
@@ -1150,9 +988,7 @@ h3 { font-size: 1.25rem; }
     line-height: 1.6;
 }
 
-/* === ESTILOS PARA PÁGINA DE COMUNIDAD SAINT === */
-
-/* Títulos y subtítulos genéricos para secciones */
+/* === PÁGINA DE COMUNIDAD SAINT === */
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -1172,7 +1008,6 @@ h3 { font-size: 1.25rem; }
     margin-right: auto;
 }
 
-/* Sección de Filosofía */
 .philosophy-container {
     display: flex;
     align-items: center;
@@ -1191,28 +1026,12 @@ h3 { font-size: 1.25rem; }
     opacity: 0.1;
 }
 
-/* Sección de Pilares */
 .pillars-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
-/* Reutilizamos y ajustamos la tarjeta de características */
-#pillars .feature-card {
-    background: var(--background-white);
-    border: 1px solid transparent;
-}
-#pillars .feature-card .category-icon {
-    background-color: var(--primary-blue);
-    color: var(--background-white);
-}
-#pillars .feature-card:nth-child(2) .category-icon {
-    background-color: var(--primary-orange);
-}
-
-
-/* Sección de Llamada a la Acción (CTA) */
 #community-cta {
     background-color: var(--primary-blue);
     color: var(--background-white);
@@ -1230,19 +1049,243 @@ h3 { font-size: 1.25rem; }
     margin: 1rem auto 2.5rem auto;
 }
 
-/* Botón más grande para el CTA principal */
 .btn-large {
     padding: 15px 35px;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-/* Media queries para responsividad */
+/* === DISEÑO RESPONSIVO === */
+@media (max-width: 1200px) {
+    .news-carousel-container {
+        max-width: 730px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .product-carousel-container {
+        max-width: 650px;
+    }
+}
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 4rem 0;
+    }
+
+    #noticias .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .news-carousel-container {
+        max-width: 350px;
+    }
+}
+
 @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: var(--background-white);
+        border-top: 1px solid var(--border-color);
+        padding: 20px 0;
+        box-shadow: var(--shadow-md);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .product-card {
+        width: calc(50% - 15px);
+    }
+
+    .news-carousel-container,
+    .product-carousel-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .news-nav-btn,
+    .product-nav-btn {
+        display: none;
+    }
+
+    .news-carousel-wrapper,
+    .product-carousel-wrapper {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .news-carousel-wrapper::-webkit-scrollbar,
+    .product-carousel-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .news-card,
+    .product-carousel .product-card {
+        scroll-snap-align: center;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .slide-content h2 {
+        font-size: 2rem;
+    }
+
+    .slide-content {
+        padding: 1.5rem;
+    }
+
     .philosophy-container {
         flex-direction: column;
     }
+
     .philosophy-visual {
         font-size: 8rem;
+    }
+
+    #noticias .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .download-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-card {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+@media (max-width: 380px) {
+    .product-carousel-container {
+        max-width: 310px;
+    }
+}
+
+/* === ESTILOS PARA INTERFAZ DE PESTAÑAS (DESCARGAS) === */
+.tabs-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.tabs-nav {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tabs-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-link {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.tab-link:hover {
+    background-color: var(--background-white);
+    color: var(--primary-blue);
+}
+
+.tab-link.active {
+    color: var(--primary-blue);
+    border-bottom-color: var(--primary-blue);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content .download-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    background-color: var(--background-white);
+    transition: box-shadow 0.3s ease;
+}
+
+.tab-content .download-item:hover {
+    box-shadow: var(--shadow-md);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

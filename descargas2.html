@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - Saintnet Latinoamerica</title>
+    <title>Descargas - Saintnet Latinoamerica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -35,62 +35,85 @@
 
     <header class="page-header">
         <div class="container">
-            <h1>Nuestras Soluciones de Software</h1>
-            <p>Herramientas poderosas diseñadas para la gestión de tu negocio.</p>
+            <h1>Centro de Descargas</h1>
+            <p>Accede a los instaladores, manuales y herramientas más recientes.</p>
         </div>
     </header>
 
-    <main id="productos-page" class="section">
+    <main class="section">
         <div class="container">
-
-            <div class="product-grid-container">
-
-                <div class="product-card">
-                    <div class="tool-icon icon-bg-blue">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3>Saint Enterprise Administrativo</h3>
-                    <p>Software de gestión robusto para optimizar todos tus procesos administrativos y de ventas.</p>
-                    <a href="#" class="btn-primary">Ver más</a>
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-link" data-tab="tab-administrativo">Enterprise Administrativo</button>
+                    <button class="tab-link" data-tab="tab-contabilidad">Enterprise Contabilidad</button>
+                    <button class="tab-link" data-tab="tab-gestion-pago">Enterprise Gestión Pago</button>
+                    <button class="tab-link" data-tab="tab-professional">Professional Más</button>
+                    <button class="tab-link" data-tab="tab-utilitarios">Utilitarios</button>
                 </div>
 
-                <div class="product-card">
-                    <div class="tool-icon icon-bg-blue">
-                        <i class="fas fa-file-invoice-dollar"></i>
+                <div id="tab-administrativo" class="tab-content">
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Instalador Principal</span>
+                            <span class="file-meta">Versión: 9.2.1 | Publicado: 20/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
-                    <h3>Saint Enterprise Contabilidad</h3>
-                    <p>La solución contable completa que tu empresa necesita para crecer con orden y precisión.</p>
-                    <a href="#" class="btn-primary">Ver más</a>
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Módulo de Actualización (Parche)</span>
+                            <span class="file-meta">Versión: 9.2.2 | Publicado: 25/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
+                    </div>
                 </div>
 
-                <div class="product-card">
-                    <div class="tool-icon icon-bg-blue">
-                        <i class="fas fa-cash-register"></i>
+                <div id="tab-contabilidad" class="tab-content">
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Manual de Usuario Completo</span>
+                            <span class="file-meta">Versión: 2.5 | Publicado: 15/06/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
-                    <h3>Saint Enterprise Gestión de Pago</h3>
-                    <p>Administra nóminas, pagos y recursos humanos de forma centralizada, eficiente y segura.</p>
-                    <a href="#" class="btn-primary">Ver más</a>
                 </div>
 
-                <div class="product-card">
-                    <div class="tool-icon icon-bg-blue">
-                        <i class="fas fa-building"></i>
+                <div id="tab-gestion-pago" class="tab-content">
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Instalador Gestión de Pago</span>
+                            <span class="file-meta">Versión: 4.0 | Publicado: 10/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
-                    <h3>Annual Enterprise</h3>
-                    <p>Nuestra plataforma integral todo en uno para la gestión completa de tu corporación.</p>
-                    <a href="#" class="btn-primary">Ver más</a>
                 </div>
 
-                <div class="product-card">
-                    <div class="tool-icon icon-bg-orange">
-                        <i class="fas fa-user-tie"></i>
+                <div id="tab-professional" class="tab-content">
+                     <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Instalador Professional Más</span>
+                            <span class="file-meta">Versión: 1.5 | Publicado: 01/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
-                    <h3>Saint Professional Más</h3>
-                    <p>Una herramienta ágil y potente diseñada para facilitar la gestión de tu negocio o práctica
-                        profesional.</p>
-                    <a href="#" class="btn-primary">Ver más</a>
                 </div>
 
+                <div id="tab-utilitarios" class="tab-content">
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Herramienta de Diagnóstico de Base de Datos</span>
+                            <span class="file-meta">Versión: 1.0 | Publicado: 01/05/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
+                    </div>
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Saint License Manager</span>
+                            <span class="file-meta">Versión: 3.1 | Publicado: 18/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

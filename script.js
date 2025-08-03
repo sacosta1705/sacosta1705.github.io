@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.querySelector('.menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 slides.forEach((slide, index) => {
                     slide.classList.remove('active');
                     if (indicators[index]) {
-                       indicators[index].classList.remove('active');
+                        indicators[index].classList.remove('active');
                     }
                 });
                 slides[currentSlide].classList.add('active');
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             const startInterval = () => {
-                slideInterval = setInterval(nextSlide, 5000);
+                slideInterval = setInterval(nextSlide, 5000); // Cambia de slide cada 5 segundos
             };
 
             const resetInterval = () => {
@@ -80,13 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     resetInterval();
                 });
             }
-            
+
             showSlide();
             startInterval();
         }
     }
 
-    // --- LÓGICA DEL CARRUSEL DE NOTICIAS CORREGIDA ---
+    // --- LÓGICA DEL CARRUSEL DE NOTICIAS ---
     const newsContainer = document.querySelector('.news-carousel-container');
     if (newsContainer) {
         const wrapper = newsContainer.querySelector('.news-carousel-wrapper');
@@ -94,10 +94,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevBtn = newsContainer.querySelector('.prev-news');
         const nextBtn = newsContainer.querySelector('.next-news');
         const cards = carousel.querySelectorAll('.news-card');
-        
+
         if (cards.length > 0) {
             let currentIndex = 0;
-            const gap = 25; // El 'gap' definido en el CSS
+            const gap = 30; // El 'gap' definido en el CSS
 
             function updateCarouselState() {
                 const cardWidth = cards[0].offsetWidth + gap;
@@ -105,11 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const visibleCards = Math.floor(wrapperWidth / cardWidth);
                 const maxIndex = cards.length - visibleCards;
 
-                // Deshabilitar botones si no hay a dónde ir
                 prevBtn.disabled = currentIndex === 0;
                 nextBtn.disabled = currentIndex >= maxIndex;
 
-                // Calcular el desplazamiento
                 const offset = -currentIndex * cardWidth;
                 carousel.style.transform = `translateX(${offset}px)`;
             }
@@ -133,109 +131,90 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Llamada inicial y al redimensionar la ventana
             updateCarouselState();
             window.addEventListener('resize', updateCarouselState);
         }
     }
-});
 
-// --- LÓGICA DEL CARRUSEL DE PRODUCTOS ---
-const productContainer = document.querySelector('.product-carousel-container');
-if (productContainer) {
-    const wrapper = productContainer.querySelector('.product-carousel-wrapper');
-    const carousel = productContainer.querySelector('.product-carousel');
-    const prevBtn = productContainer.querySelector('.prev-product');
-    const nextBtn = productContainer.querySelector('.next-product');
-    const cards = carousel.querySelectorAll('.product-card');
-    
-    if (cards.length > 0) {
-        let currentIndex = 0;
-        const gap = 30; // El 'gap' definido en el CSS
+    // --- LÓGICA DEL CARRUSEL DE PRODUCTOS ---
+    const productContainer = document.querySelector('.product-carousel-container');
+    if (productContainer) {
+        const wrapper = productContainer.querySelector('.product-carousel-wrapper');
+        const carousel = productContainer.querySelector('.product-carousel');
+        const prevBtn = productContainer.querySelector('.prev-product');
+        const nextBtn = productContainer.querySelector('.next-product');
+        const cards = carousel.querySelectorAll('.product-card');
 
-        function updateCarouselState() {
-            // Asegurarse que los elementos existen antes de acceder a sus propiedades
-            if (!cards[0] || !wrapper || !prevBtn || !nextBtn) return;
+        if (cards.length > 0) {
+            let currentIndex = 0;
+            const gap = 30;
 
-            const cardWidth = cards[0].offsetWidth + gap;
-            const wrapperWidth = wrapper.clientWidth;
-            // Math.round para evitar problemas con decimales en el ancho
-            const visibleCards = Math.round(wrapperWidth / cardWidth); 
-            const maxIndex = cards.length - visibleCards;
+            function updateCarouselState() {
+                if (!cards[0] || !wrapper || !prevBtn || !nextBtn) return;
 
-            // Deshabilitar botones si no hay a dónde ir
-            prevBtn.disabled = currentIndex === 0;
-            // Asegurarse que maxIndex no sea negativo
-            nextBtn.disabled = currentIndex >= maxIndex || maxIndex < 1;
+                const cardWidth = cards[0].offsetWidth + gap;
+                const wrapperWidth = wrapper.clientWidth;
+                const visibleCards = Math.round(wrapperWidth / cardWidth);
+                const maxIndex = cards.length - visibleCards;
 
-            // Calcular el desplazamiento
-            const offset = -currentIndex * cardWidth;
-            carousel.style.transform = `translateX(${offset}px)`;
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex >= maxIndex || maxIndex < 1;
+
+                const offset = -currentIndex * cardWidth;
+                carousel.style.transform = `translateX(${offset}px)`;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                const cardWidth = cards[0].offsetWidth + gap;
+                const wrapperWidth = wrapper.clientWidth;
+                const visibleCards = Math.round(wrapperWidth / cardWidth);
+                const maxIndex = cards.length - visibleCards;
+
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                    updateCarouselState();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarouselState();
+                }
+            });
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(updateCarouselState, 250);
+            });
+
+            updateCarouselState();
         }
-
-        nextBtn.addEventListener('click', () => {
-            const cardWidth = cards[0].offsetWidth + gap;
-            const wrapperWidth = wrapper.clientWidth;
-            const visibleCards = Math.round(wrapperWidth / cardWidth);
-            const maxIndex = cards.length - visibleCards;
-
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-                updateCarouselState();
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarouselState();
-            }
-        });
-
-        // Llamada inicial y al redimensionar la ventana
-        // Usar un temporizador en el resize para evitar llamadas excesivas
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(updateCarouselState, 250);
-        });
-        
-        // Llamada inicial para configurar el estado
-        updateCarouselState();
     }
-}
 
-// --- LÓGICA DE ACORDEÓN PARA PÁGINA DE DESCARGAS ---
-document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona todos los encabezados de las tarjetas de descarga
+    // --- LÓGICA DE ACORDEÓN PARA PÁGINA DE DESCARGAS ---
     const cardHeaders = document.querySelectorAll('.download-card-header');
-
     cardHeaders.forEach(header => {
         header.addEventListener('click', () => {
-            // Encuentra el contenedor de la lista de descargas
             const list = header.nextElementSibling;
-            
-            // Alterna la clase 'active' en el encabezado
+
             header.classList.toggle('active');
 
-            // Alterna la visibilidad de la lista
             if (list.style.maxHeight) {
-                list.style.maxHeight = null; // Colapsar
+                list.style.maxHeight = null;
             } else {
-                list.style.maxHeight = list.scrollHeight + "px"; // Expandir
-            } 
+                list.style.maxHeight = list.scrollHeight + "px";
+            }
         });
     });
-});
 
-// --- LÓGICA DE PAGINACIÓN PARA LA PÁGINA DE NOTICIAS ---
-document.addEventListener('DOMContentLoaded', function() {
+    // --- LÓGICA DE PAGINACIÓN PARA LA PÁGINA DE NOTICIAS ---
     const newsGrid = document.getElementById('news-grid');
     const paginationContainer = document.getElementById('pagination-container');
 
-    // Solo ejecutar si estamos en la página de noticias (verificando la existencia de los elementos)
     if (newsGrid && paginationContainer) {
-        const itemsPerPage = 6; // ¿Cuántas noticias mostrar por página?
+        const itemsPerPage = 6;
         const allNewsItems = Array.from(newsGrid.getElementsByClassName('news-card'));
         const totalPages = Math.ceil(allNewsItems.length / itemsPerPage);
         let currentPage = 1;
@@ -245,27 +224,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const startIndex = (page - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
 
-            // Ocultar todos los artículos
             allNewsItems.forEach(item => item.style.display = 'none');
-
-            // Mostrar solo los artículos de la página actual
             allNewsItems.slice(startIndex, endIndex).forEach(item => item.style.display = 'flex');
 
             updatePaginationUI();
-            window.scrollTo(0, 0); // Opcional: lleva al usuario al inicio de la página
+            window.scrollTo(0, 0);
         }
 
         function updatePaginationUI() {
-            paginationContainer.innerHTML = ''; // Limpiar botones existentes
+            paginationContainer.innerHTML = '';
 
-            // Botón "Anterior"
             const prevButton = document.createElement('button');
             prevButton.innerHTML = '&laquo;';
             prevButton.disabled = currentPage === 1;
             prevButton.addEventListener('click', () => showPage(currentPage - 1));
             paginationContainer.appendChild(prevButton);
 
-            // Botones de número de página
             for (let i = 1; i <= totalPages; i++) {
                 const pageButton = document.createElement('button');
                 pageButton.textContent = i;
@@ -276,15 +250,61 @@ document.addEventListener('DOMContentLoaded', function() {
                 paginationContainer.appendChild(pageButton);
             }
 
-            // Botón "Siguiente"
             const nextButton = document.createElement('button');
             nextButton.innerHTML = '&raquo;';
             nextButton.disabled = currentPage === totalPages;
             nextButton.addEventListener('click', () => showPage(currentPage + 1));
             paginationContainer.appendChild(nextButton);
         }
-        
-        // Mostrar la primera página por defecto
+
         showPage(1);
     }
+});
+
+// --- LÓGICA PARA INTERFAZ DE PESTAÑAS ---
+document.addEventListener('DOMContentLoaded', function () {
+    const tabsContainer = document.querySelector('.tabs-container');
+    if (tabsContainer) {
+        const tabLinks = tabsContainer.querySelectorAll('.tab-link');
+        const tabContents = tabsContainer.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const targetTab = link.getAttribute('data-tab');
+
+                // Desactivar todas las pestañas y contenidos
+                tabLinks.forEach(item => item.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Activar la pestaña y el contenido seleccionados
+                link.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Activar la primera pestaña por defecto
+        if (tabLinks.length > 0) {
+            tabLinks[0].click();
+        }
+    }
+});
+
+// --- LÓGICA PARA ANIMACIONES AL DESPLAZAR (Scroll Animations) ---
+document.addEventListener('DOMContentLoaded', function () {
+    const animatedElements = document.querySelectorAll('.product-card, .feature-card, .news-card, .section h2');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated', 'fadeInUp');
+                observer.unobserve(entry.target); // Para que la animación ocurra solo una vez
+            }
+        });
+    }, {
+        threshold: 0.1 // La animación se dispara cuando el 10% del elemento es visible
+    });
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
 });
