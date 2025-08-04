@@ -14,8 +14,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <a href="/"><img src="/images/saint_logo_azul.png" alt="Saintnet Latinoamerica" height="40px"
-                        width="100px"></a>
+                <a href="/"><img src="/images/saint_logo_azul.png" alt="Saintnet Latinoamerica" height="40px" width="100px"></a>
             </div>
             <ul class="nav-links">
                 <li><a href="/">Inicio</a></li>
@@ -36,7 +35,7 @@
     <header class="page-header">
         <div class="container">
             <h1>Encuentra un Distribuidor</h1>
-            <p>Conecta con nuestros socios de negocios autorizados en tu país.</p>
+            <p>Conecta con nuestros socios de negocios autorizados en tu país y estado.</p>
         </div>
     </header>
 
@@ -50,25 +49,37 @@
                     <option value="cl">Chile</option>
                     <option value="co">Colombia</option>
                 </select>
+                <select id="state-filter" disabled>
+                    <option value="todos">Todos los estados</option>
+                </select>
             </div>
 
             <div class="distributor-cards-container">
-                <div class="distributor-card" data-country="ar">
+                <div class="distributor-card" data-country="ar" data-state="buenos-aires">
                     <img src="https://via.placeholder.com/100x100/cccccc/FFFFFF?text=Logo" alt="Logo del distribuidor">
                     <div class="distributor-info">
-                        <h3>Nombre del Distribuidor (Argentina)</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Ciudad, Provincia</p>
+                        <h3>Distribuidor de Buenos Aires</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
                         <p><i class="fas fa-phone"></i> +54 11 1234-5678</p>
-                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">sitiooficial.com</a></p>
+                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">sitio-ar.com</a></p>
                     </div>
                 </div>
-                <div class="distributor-card" data-country="co">
+                <div class="distributor-card" data-country="co" data-state="cundinamarca">
                     <img src="https://via.placeholder.com/100x100/cccccc/FFFFFF?text=Logo" alt="Logo del distribuidor">
                     <div class="distributor-info">
-                        <h3>Otro Distribuidor (Colombia)</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> Bogotá, Cundinamarca</p>
+                        <h3>Distribuidor de Bogotá</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Bogotá, Cundinamarca, Colombia</p>
                         <p><i class="fas fa-phone"></i> +57 1 9876-5432</p>
-                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">otrodistribuidor.com</a></p>
+                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">sitio-co.com</a></p>
+                    </div>
+                </div>
+                <div class="distributor-card" data-country="ar" data-state="cordoba">
+                    <img src="https://via.placeholder.com/100x100/cccccc/FFFFFF?text=Logo" alt="Logo del distribuidor">
+                    <div class="distributor-info">
+                        <h3>Distribuidor de Córdoba</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Córdoba, Argentina</p>
+                        <p><i class="fas fa-phone"></i> +54 351 123-4567</p>
+                        <p><i class="fas fa-globe"></i> <a href="#" target="_blank">sitio-cordoba.com</a></p>
                     </div>
                 </div>
             </div>

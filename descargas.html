@@ -14,8 +14,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <a href="/"><img src="/images/saint_logo_azul.png" alt="Saintnet Latinoamerica" height="40px"
-                        width="100px"></a>
+                <a href="/"><img src="/images/saint_logo_azul.png" alt="Saintnet Latinoamerica" height="40px" width="100px"></a>
             </div>
             <ul class="nav-links">
                 <li><a href="/">Inicio</a></li>
@@ -42,18 +41,16 @@
 
     <main class="section">
         <div class="container">
-
-            <div class="download-card">
-                <div class="download-card-header">
-                    <div class="product-icon">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>Saint Enterprise Administrativo</h3>
-                        <p>Instaladores, actualizaciones y herramientas del sistema principal.</p>
-                    </div>
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-link" data-tab="tab-administrativo">Enterprise Administrativo</button>
+                    <button class="tab-link" data-tab="tab-contabilidad">Enterprise Contabilidad</button>
+                    <button class="tab-link" data-tab="tab-gestion-pago">Enterprise Gestión Pago</button>
+                    <button class="tab-link" data-tab="tab-professional">Professional Más</button>
+                    <button class="tab-link" data-tab="tab-utilitarios">Utilitarios</button>
                 </div>
-                <div class="download-list">
+
+                <div id="tab-administrativo" class="tab-content">
                     <div class="download-item">
                         <div class="file-info">
                             <span class="file-name">Instalador Principal</span>
@@ -69,19 +66,8 @@
                         <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
                 </div>
-            </div>
 
-            <div class="download-card">
-                <div class="download-card-header">
-                    <div class="product-icon">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>Saint Enterprise Contabilidad</h3>
-                        <p>Manuales de usuario y guías de configuración.</p>
-                    </div>
-                </div>
-                <div class="download-list">
+                <div id="tab-contabilidad" class="tab-content">
                     <div class="download-item">
                         <div class="file-info">
                             <span class="file-name">Manual de Usuario Completo</span>
@@ -90,19 +76,28 @@
                         <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
                 </div>
-            </div>
 
-            <div class="download-card">
-                <div class="download-card-header">
-                    <div class="product-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>Utilitarios y Herramientas</h3>
-                        <p>Software de diagnóstico y utilidades para todos los productos.</p>
+                <div id="tab-gestion-pago" class="tab-content">
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Instalador Gestión de Pago</span>
+                            <span class="file-meta">Versión: 4.0 | Publicado: 10/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
                     </div>
                 </div>
-                <div class="download-list">
+
+                <div id="tab-professional" class="tab-content">
+                    <div class="download-item">
+                        <div class="file-info">
+                            <span class="file-name">Instalador Professional Más</span>
+                            <span class="file-meta">Versión: 1.5 | Publicado: 01/07/2024</span>
+                        </div>
+                        <a href="#" class="download-button"><i class="fas fa-download"></i> Descargar</a>
+                    </div>
+                </div>
+
+                <div id="tab-utilitarios" class="tab-content">
                     <div class="download-item">
                         <div class="file-info">
                             <span class="file-name">Herramienta de Diagnóstico de Base de Datos</span>
@@ -119,7 +114,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 

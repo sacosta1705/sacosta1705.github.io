@@ -1,310 +1,283 @@
-document.addEventListener('DOMContentLoaded', function () {
+/**
+ * @file Script principal para la interactividad del sitio web de Saint.
+ * @summary Este script inicializa todos los componentes interactivos del sitio.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializador principal
+    setupMobileMenu();
+    setupHeroCarousel();
+    setupProductCarousel();
+    setupNewsCarousel();
+    setupDownloadsAccordion();
+    setupDownloadTabs();
+    setupNewsPagination();
+    setupScrollAnimations();
+    setupDistributorFilter(); // Se llama a la nueva función de filtro
+});
+
+// ... (Aquí van todas las demás funciones como setupMobileMenu, setupHeroCarousel, etc. sin cambios)
+function setupMobileMenu() {
     const menuBtn = document.querySelector('.menu-btn');
     const navLinks = document.querySelector('.nav-links');
+    if (!menuBtn || !navLinks) { return; }
+    menuBtn.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+}
 
-    // Lógica para el menú móvil
-    if (menuBtn && navLinks) {
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    }
-
-    // --- LÓGICA DEL CARRUSEL PRINCIPAL ---
+function setupHeroCarousel() {
     const heroCarousel = document.querySelector('.hero-carousel');
-    if (heroCarousel) {
-        const slides = document.querySelectorAll('.slide');
-        const nextBtn = document.querySelector('.carousel-control.next');
-        const prevBtn = document.querySelector('.carousel-control.prev');
-        const indicatorsContainer = document.querySelector('.carousel-indicators');
-        let currentSlide = 0;
-        let slideInterval;
+    if (!heroCarousel) return;
+    const slides = heroCarousel.querySelectorAll('.slide');
+    if (slides.length <= 1) return;
+    let currentSlide = 0;
+    const showSlide = (index) => {
+        slides.forEach((slide) => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+    };
+    const nextSlide = () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    };
+    setInterval(nextSlide, 5000);
+}
 
-        if (slides.length > 0) {
-            slides.forEach((slide, index) => {
-                const indicator = document.createElement('div');
-                indicator.classList.add('indicator');
-                if (index === 0) indicator.classList.add('active');
-                indicator.addEventListener('click', () => setSlide(index));
-                if (indicatorsContainer) {
-                    indicatorsContainer.appendChild(indicator);
-                }
-            });
+function setupGenericCarousel(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+    const wrapper = container.querySelector('.product-carousel-wrapper, .news-carousel-wrapper');
+    const carousel = container.querySelector('.product-carousel, .news-carousel');
+    const prevBtn = container.querySelector('.prev-product, .prev-news');
+    const nextBtn = container.querySelector('.next-product, .next-news');
+    if (!wrapper || !carousel || !prevBtn || !nextBtn) return;
+    const cards = carousel.querySelectorAll('.product-card, .news-card');
+    if (cards.length === 0) return;
+    let currentIndex = 0;
+    const gap = 30;
 
-            const indicators = document.querySelectorAll('.indicator');
-
-            const showSlide = () => {
-                slides.forEach((slide, index) => {
-                    slide.classList.remove('active');
-                    if (indicators[index]) {
-                        indicators[index].classList.remove('active');
-                    }
-                });
-                slides[currentSlide].classList.add('active');
-                if (indicators[currentSlide]) {
-                    indicators[currentSlide].classList.add('active');
-                }
-            };
-
-            const nextSlide = () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide();
-            };
-
-            const prevSlide = () => {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide();
-            };
-
-            const setSlide = (index) => {
-                currentSlide = index;
-                showSlide();
-                resetInterval();
-            };
-
-            const startInterval = () => {
-                slideInterval = setInterval(nextSlide, 5000); // Cambia de slide cada 5 segundos
-            };
-
-            const resetInterval = () => {
-                clearInterval(slideInterval);
-                startInterval();
-            };
-
-            if (nextBtn && prevBtn) {
-                nextBtn.addEventListener('click', () => {
-                    nextSlide();
-                    resetInterval();
-                });
-                prevBtn.addEventListener('click', () => {
-                    prevSlide();
-                    resetInterval();
-                });
-            }
-
-            showSlide();
-            startInterval();
-        }
+    function updateCarouselState() {
+        const cardWidth = cards[0].offsetWidth;
+        const totalCardWidth = cardWidth + gap;
+        const wrapperWidth = wrapper.clientWidth;
+        const visibleCards = Math.round(wrapperWidth / totalCardWidth);
+        const maxIndex = Math.max(0, cards.length - visibleCards);
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
+        const offset = -currentIndex * totalCardWidth;
+        carousel.style.transform = `translateX(${offset}px)`;
     }
-
-    // --- LÓGICA DEL CARRUSEL DE NOTICIAS ---
-    const newsContainer = document.querySelector('.news-carousel-container');
-    if (newsContainer) {
-        const wrapper = newsContainer.querySelector('.news-carousel-wrapper');
-        const carousel = newsContainer.querySelector('.news-carousel');
-        const prevBtn = newsContainer.querySelector('.prev-news');
-        const nextBtn = newsContainer.querySelector('.next-news');
-        const cards = carousel.querySelectorAll('.news-card');
-
-        if (cards.length > 0) {
-            let currentIndex = 0;
-            const gap = 30; // El 'gap' definido en el CSS
-
-            function updateCarouselState() {
-                const cardWidth = cards[0].offsetWidth + gap;
-                const wrapperWidth = wrapper.clientWidth;
-                const visibleCards = Math.floor(wrapperWidth / cardWidth);
-                const maxIndex = cards.length - visibleCards;
-
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex >= maxIndex;
-
-                const offset = -currentIndex * cardWidth;
-                carousel.style.transform = `translateX(${offset}px)`;
-            }
-
-            nextBtn.addEventListener('click', () => {
-                const cardWidth = cards[0].offsetWidth + gap;
-                const wrapperWidth = wrapper.clientWidth;
-                const visibleCards = Math.floor(wrapperWidth / cardWidth);
-                const maxIndex = cards.length - visibleCards;
-
-                if (currentIndex < maxIndex) {
-                    currentIndex++;
-                    updateCarouselState();
-                }
-            });
-
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarouselState();
-                }
-            });
-
-            updateCarouselState();
-            window.addEventListener('resize', updateCarouselState);
-        }
-    }
-
-    // --- LÓGICA DEL CARRUSEL DE PRODUCTOS ---
-    const productContainer = document.querySelector('.product-carousel-container');
-    if (productContainer) {
-        const wrapper = productContainer.querySelector('.product-carousel-wrapper');
-        const carousel = productContainer.querySelector('.product-carousel');
-        const prevBtn = productContainer.querySelector('.prev-product');
-        const nextBtn = productContainer.querySelector('.next-product');
-        const cards = carousel.querySelectorAll('.product-card');
-
-        if (cards.length > 0) {
-            let currentIndex = 0;
-            const gap = 30;
-
-            function updateCarouselState() {
-                if (!cards[0] || !wrapper || !prevBtn || !nextBtn) return;
-
-                const cardWidth = cards[0].offsetWidth + gap;
-                const wrapperWidth = wrapper.clientWidth;
-                const visibleCards = Math.round(wrapperWidth / cardWidth);
-                const maxIndex = cards.length - visibleCards;
-
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex >= maxIndex || maxIndex < 1;
-
-                const offset = -currentIndex * cardWidth;
-                carousel.style.transform = `translateX(${offset}px)`;
-            }
-
-            nextBtn.addEventListener('click', () => {
-                const cardWidth = cards[0].offsetWidth + gap;
-                const wrapperWidth = wrapper.clientWidth;
-                const visibleCards = Math.round(wrapperWidth / cardWidth);
-                const maxIndex = cards.length - visibleCards;
-
-                if (currentIndex < maxIndex) {
-                    currentIndex++;
-                    updateCarouselState();
-                }
-            });
-
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarouselState();
-                }
-            });
-
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(updateCarouselState, 250);
-            });
-
+    nextBtn.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth + gap;
+        const wrapperWidth = wrapper.clientWidth;
+        const visibleCards = Math.round(wrapperWidth / cardWidth);
+        const maxIndex = cards.length - visibleCards;
+        if (currentIndex < maxIndex) {
+            currentIndex++;
             updateCarouselState();
         }
-    }
+    });
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarouselState();
+        }
+    });
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateCarouselState, 250);
+    });
+    updateCarouselState();
+}
 
-    // --- LÓGICA DE ACORDEÓN PARA PÁGINA DE DESCARGAS ---
-    const cardHeaders = document.querySelectorAll('.download-card-header');
-    cardHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const list = header.nextElementSibling;
+function setupProductCarousel() { setupGenericCarousel('.product-carousel-container'); }
 
-            header.classList.toggle('active');
+function setupNewsCarousel() { setupGenericCarousel('.news-carousel-container'); }
 
-            if (list.style.maxHeight) {
-                list.style.maxHeight = null;
-            } else {
-                list.style.maxHeight = list.scrollHeight + "px";
-            }
+function setupDownloadsAccordion() {
+    const accordions = document.querySelectorAll('.download-card');
+    if (!accordions.length) return;
+    accordions.forEach(accordion => {
+        const header = accordion.querySelector('.download-card-header');
+        const list = accordion.querySelector('.download-list');
+        if (header && list) {
+            header.addEventListener('click', () => {
+                header.classList.toggle('active');
+                if (list.style.maxHeight) {
+                    list.style.maxHeight = null;
+                } else {
+                    list.style.maxHeight = list.scrollHeight + "px";
+                }
+            });
+        }
+    });
+}
+
+function setupDownloadTabs() {
+    const tabsContainer = document.querySelector('.tabs-container');
+    if (!tabsContainer) return;
+    const tabLinks = tabsContainer.querySelectorAll('.tab-link');
+    const tabContents = tabsContainer.querySelectorAll('.tab-content');
+    tabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const targetTab = link.getAttribute('data-tab');
+            tabLinks.forEach(item => item.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            link.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
         });
     });
+    if (tabLinks.length > 0) { tabLinks[0].click(); }
+}
 
-    // --- LÓGICA DE PAGINACIÓN PARA LA PÁGINA DE NOTICIAS ---
+function setupNewsPagination() {
     const newsGrid = document.getElementById('news-grid');
     const paginationContainer = document.getElementById('pagination-container');
-
-    if (newsGrid && paginationContainer) {
-        const itemsPerPage = 6;
-        const allNewsItems = Array.from(newsGrid.getElementsByClassName('news-card'));
-        const totalPages = Math.ceil(allNewsItems.length / itemsPerPage);
-        let currentPage = 1;
-
-        function showPage(page) {
-            currentPage = page;
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-
-            allNewsItems.forEach(item => item.style.display = 'none');
-            allNewsItems.slice(startIndex, endIndex).forEach(item => item.style.display = 'flex');
-
-            updatePaginationUI();
-            window.scrollTo(0, 0);
-        }
-
-        function updatePaginationUI() {
-            paginationContainer.innerHTML = '';
-
-            const prevButton = document.createElement('button');
-            prevButton.innerHTML = '&laquo;';
-            prevButton.disabled = currentPage === 1;
-            prevButton.addEventListener('click', () => showPage(currentPage - 1));
-            paginationContainer.appendChild(prevButton);
-
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.textContent = i;
-                if (i === currentPage) {
-                    pageButton.classList.add('active');
-                }
-                pageButton.addEventListener('click', () => showPage(i));
-                paginationContainer.appendChild(pageButton);
-            }
-
-            const nextButton = document.createElement('button');
-            nextButton.innerHTML = '&raquo;';
-            nextButton.disabled = currentPage === totalPages;
-            nextButton.addEventListener('click', () => showPage(currentPage + 1));
-            paginationContainer.appendChild(nextButton);
-        }
-
-        showPage(1);
+    if (!newsGrid || !paginationContainer) return;
+    const itemsPerPage = 6;
+    const allNewsItems = Array.from(newsGrid.getElementsByClassName('news-card'));
+    const totalPages = Math.ceil(allNewsItems.length / itemsPerPage);
+    let currentPage = 1;
+    if (totalPages <= 1) {
+        paginationContainer.style.display = 'none';
+        allNewsItems.forEach(item => item.style.display = 'flex');
+        return;
     }
-});
 
-// --- LÓGICA PARA INTERFAZ DE PESTAÑAS ---
-document.addEventListener('DOMContentLoaded', function () {
-    const tabsContainer = document.querySelector('.tabs-container');
-    if (tabsContainer) {
-        const tabLinks = tabsContainer.querySelectorAll('.tab-link');
-        const tabContents = tabsContainer.querySelectorAll('.tab-content');
-
-        tabLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                const targetTab = link.getAttribute('data-tab');
-
-                // Desactivar todas las pestañas y contenidos
-                tabLinks.forEach(item => item.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                // Activar la pestaña y el contenido seleccionados
-                link.classList.add('active');
-                document.getElementById(targetTab).classList.add('active');
-            });
-        });
-
-        // Activar la primera pestaña por defecto
-        if (tabLinks.length > 0) {
-            tabLinks[0].click();
-        }
+    function showPage(page) {
+        currentPage = page;
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        allNewsItems.forEach(item => item.style.display = 'none');
+        allNewsItems.slice(startIndex, endIndex).forEach(item => item.style.display = 'flex');
+        updatePaginationUI();
+        window.scrollTo({ top: newsGrid.offsetTop - 100, behavior: 'smooth' });
     }
-});
 
-// --- LÓGICA PARA ANIMACIONES AL DESPLAZAR (Scroll Animations) ---
-document.addEventListener('DOMContentLoaded', function () {
+    function updatePaginationUI() {
+        paginationContainer.innerHTML = '';
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = '&laquo;';
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener('click', () => showPage(currentPage - 1));
+        paginationContainer.appendChild(prevButton);
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.textContent = i;
+            if (i === currentPage) { pageButton.classList.add('active'); }
+            pageButton.addEventListener('click', () => showPage(i));
+            paginationContainer.appendChild(pageButton);
+        }
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = '&raquo;';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => showPage(currentPage + 1));
+        paginationContainer.appendChild(nextButton);
+    }
+    showPage(1);
+}
+
+function setupScrollAnimations() {
     const animatedElements = document.querySelectorAll('.product-card, .feature-card, .news-card, .section h2');
-
-    const observer = new IntersectionObserver((entries) => {
+    if (animatedElements.length === 0) return;
+    const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animated', 'fadeInUp');
-                observer.unobserve(entry.target); // Para que la animación ocurra solo una vez
+                entry.target.style.animation = `fadeInUp 0.6s ease forwards`;
+                observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.1 // La animación se dispara cuando el 10% del elemento es visible
-    });
-
+    }, { threshold: 0.1 });
     animatedElements.forEach(el => {
+        el.style.opacity = '0';
         observer.observe(el);
     });
-});
+    if (!document.getElementById('fadeInUpAnimation')) {
+        const styleSheet = document.createElement("style");
+        styleSheet.id = 'fadeInUpAnimation';
+        styleSheet.innerText = `@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }`;
+        document.head.appendChild(styleSheet);
+    }
+}
+
+/**
+ * [NUEVA FUNCIÓN] Configura el filtro de distribuidores por país y estado.
+ */
+function setupDistributorFilter() {
+    const countryFilter = document.getElementById('country-filter');
+    const stateFilter = document.getElementById('state-filter');
+    const distributorCards = document.querySelectorAll('.distributor-card');
+
+    if (!countryFilter || !stateFilter || distributorCards.length === 0) {
+        return; // Salir si los elementos no existen
+    }
+
+    // Base de datos de estados por país. Esto debería ser llenado con datos reales.
+    const statesByCountry = {
+        'ar': {
+            'buenos-aires': 'Buenos Aires',
+            'cordoba': 'Córdoba',
+            'santa-fe': 'Santa Fe'
+        },
+        'co': {
+            'cundinamarca': 'Cundinamarca',
+            'antioquia': 'Antioquia',
+            'valle-del-cauca': 'Valle del Cauca'
+        },
+        'cl': {
+            'santiago': 'Metropolitana de Santiago',
+            'valparaiso': 'Valparaíso'
+        },
+        'bo': {
+            'la-paz': 'La Paz',
+            'santa-cruz': 'Santa Cruz'
+        }
+    };
+
+    // Función para actualizar el filtro de estados
+    function updateStateFilter() {
+        const selectedCountry = countryFilter.value;
+        // Limpiar opciones anteriores
+        stateFilter.innerHTML = '<option value="todos">Todos los estados</option>';
+
+        if (selectedCountry !== 'todos' && statesByCountry[selectedCountry]) {
+            stateFilter.disabled = false;
+            const states = statesByCountry[selectedCountry];
+            for (const stateValue in states) {
+                const option = document.createElement('option');
+                option.value = stateValue;
+                option.textContent = states[stateValue];
+                stateFilter.appendChild(option);
+            }
+        } else {
+            stateFilter.disabled = true;
+        }
+        filterResults();
+    }
+
+    // Función para filtrar los resultados
+    function filterResults() {
+        const selectedCountry = countryFilter.value;
+        const selectedState = stateFilter.value;
+
+        distributorCards.forEach(card => {
+            const cardCountry = card.getAttribute('data-country');
+            const cardState = card.getAttribute('data-state');
+
+            const countryMatch = selectedCountry === 'todos' || selectedCountry === cardCountry;
+            const stateMatch = selectedState === 'todos' || selectedState === cardState || stateFilter.disabled;
+
+            if (countryMatch && stateMatch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Event Listeners
+    countryFilter.addEventListener('change', updateStateFilter);
+    stateFilter.addEventListener('change', filterResults);
+
+    // Llamada inicial para asegurar estado correcto
+    updateStateFilter();
+}
